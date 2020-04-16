@@ -8,10 +8,10 @@ public class BinarySearch {
     }
 
     public static int binarySearch(int[] sortedArray, int low, int high, int item) {
-        if (sortedArray.length == 0 || low >= high) {
+        if (low >= high) {
             return NOT_FOUND;
         }
-        int middleIndex = (low + high) / 2;
+        int middleIndex = low + (high - low) / 2;
         int middleValue = sortedArray[middleIndex];
         if (middleValue > item){
             return binarySearch(sortedArray, low, middleIndex, item);   //recursion
