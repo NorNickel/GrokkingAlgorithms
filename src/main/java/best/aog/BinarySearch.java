@@ -3,22 +3,23 @@ package best.aog;
 public class BinarySearch {
     public static final int NOT_FOUND = -1;
 
-    public static int indexOf(int[] sortedArray, int item){
-        return indexOf(sortedArray, item, 0, sortedArray.length - 1);
+    public static int binarySearch(int[] sortedArray, int item){
+        return binarySearch(sortedArray, 0, sortedArray.length - 1, item);
     }
 
-    public static int indexOf(int[] sortedArray, int item, int right, int left) {
-        if (left - right == 1){
-            if (sortedArray[left] == item) {
-                return left;
-            }
+    public static int binarySearch(int[] sortedArray, int low, int high, int item) {
+        if (sortedArray.length == 0 || low >= high) {
             return NOT_FOUND;
         }
-        int middle = (left + right) / 2;
-        if (sortedArray[middle] >= item){
-            return indexOf(sortedArray, item, right, middle);  //recursion
+        int middleIndex = (low + high) / 2;
+        int middleValue = sortedArray[middleIndex];
+        if (middleValue > item){
+            return binarySearch(sortedArray, low, middleIndex, item);   //recursion
+        } else if  (sortedArray[middleIndex] < item) {
+            return binarySearch(sortedArray, middleIndex + 1, high, item);  //recursion
         } else {
-            return indexOf(sortedArray, item, middle, left);   //recursion
+            return middleIndex;
         }
     }
+
 }
